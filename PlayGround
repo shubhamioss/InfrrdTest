@@ -1,0 +1,27 @@
+let lootArray = [3, 6, 2, 7, 5];
+let lastIndex = null;
+let day = 0;
+function countDays(lootArray) {
+  let newArray = [];
+  lootArray.forEach((val, index) => {
+    if (lastIndex != null) {
+      if (lootArray[lastIndex] < lootArray[index]) {
+        lastIndex = null;
+      } else {
+        lastIndex = index;
+        newArray.push(lootArray[index]);
+      }
+    } else {
+      lastIndex = index;
+      newArray.push(lootArray[index]);
+    }
+  });
+  if (lootArray.length !== newArray.length) {
+    lastIndex = null;
+    day++;
+    return countDays(newArray);
+  }
+  return newArray;
+}
+console.log(countDays(lootArray));
+console.log('day count = ' + day);
